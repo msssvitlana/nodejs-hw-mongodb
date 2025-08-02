@@ -21,6 +21,9 @@ export const setupServer = async () => {
       },
     }),
   );
+  app.get('/', (req, res) => {
+    res.send('API is running!');
+  });
 
   app.get('/contacts', async (req, res) => {
     const contacts = await getAllContacts();

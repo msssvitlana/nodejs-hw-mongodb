@@ -8,16 +8,6 @@ export const createContactSchema = Joi.object({
   contactType: Joi.string().valid('work', 'home', 'personal').required(),
 });
 
-// const validationResult = createContactSchema.validate(userData, {
-//   abortEarly: false,
-// });
-
-// if (validationResult.error) {
-//   console.error(validationResult.error.message);
-// } else {
-//   console.log('Data is valid!');
-// }
-
 export const updateContactSchema = Joi.object({
   name: Joi.string().min(3).max(20),
   phoneNumber: Joi.string().min(3).max(20),

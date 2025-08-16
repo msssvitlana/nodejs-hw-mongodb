@@ -18,10 +18,8 @@ const parseIsFavourite = (isFavourite) => {
 };
 export const parseFilterParams = (query) => {
   const { type, isFavourite } = query;
-  const { type, isFavourite } = query;
 
   const parsedType = parseType(type);
-  const parsedIsFavourite = parseIsFavourite(isFavourite);
   const parsedIsFavourite = parseIsFavourite(isFavourite);
 
   return {

@@ -11,7 +11,6 @@ const parseType = (type) => {
   if (isType(type)) return type;
 };
 
-
 const parseIsFavourite = (isFavourite) => {
   if (typeof isFavourite !== 'string') return;
   if (isFavourite === 'true') return true;
@@ -24,8 +23,7 @@ export const parseFilterParams = (query) => {
   const parsedIsFavourite = parseIsFavourite(isFavourite);
 
   return {
-    type: parsedType,
+    contactType: parsedType,
     isFavourite: parsedIsFavourite,
-
   };
 };

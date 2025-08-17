@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { registerUserSchema } from '../validation/auth';
-import { registerUserController } from '../controllers/auth';
+import { registerUserSchema } from '../validation/auth.js';
+import { registerUserController } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 

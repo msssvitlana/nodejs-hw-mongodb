@@ -1,3 +1,4 @@
+import { required } from 'joi';
 import { model, Schema } from 'mongoose';
 
 const contactSchema = new Schema(
@@ -12,7 +13,9 @@ const contactSchema = new Schema(
     },
     email: {
       type: String,
+      required: true,
     },
+
     isFavourite: {
       type: Boolean,
       default: false,

@@ -3,7 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { getEnvVar } from './utils/getEnvVar.js';
-import contactsRouter from './routers/contacts.js';
+import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 dotenv.config();
@@ -30,7 +30,7 @@ export const setupServer = async () => {
   app.get('/', (req, res) => {
     res.send('API is running!');
   });
-  app.use(contactsRouter);
+  app.use(router);
   app.use(notFoundHandler);
   app.use(errorHandler);
 

@@ -8,7 +8,6 @@ export const createContactSchema = Joi.object({
   contactType: Joi.string().valid('work', 'home', 'personal').required(),
 });
 
-
 // const validationResult = createContactSchema.validate(userData, {
 //   abortEarly: false,
 // });

@@ -6,6 +6,7 @@ import { getEnvVar } from './utils/getEnvVar.js';
 import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -19,7 +20,7 @@ export const setupServer = async () => {
   );
 
   app.use(cors());
-
+  app.use(cookieParser());
   app.use(
     pino({
       transport: {

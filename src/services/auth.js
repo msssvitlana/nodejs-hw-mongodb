@@ -41,6 +41,7 @@ export const loginUser = async (payload) => {
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
+
 };
 
 export const logoutUser = async (sessionId) => {
@@ -83,4 +84,5 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     userId: session.userId,
     ...newSession,
   });
+
 };

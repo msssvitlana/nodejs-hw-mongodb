@@ -14,8 +14,12 @@ import {
   updateContactSchema,
 } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const contactsRouter = Router();
+
+contactsRouter.use(authenticate);
+
 contactsRouter.get('/', getContactsController);
 contactsRouter.get(
   '/:contactId',
@@ -48,4 +52,5 @@ contactsRouter.patch(
   isValidId,
   ctrlWrapper(patchContactController),
 );
+
 export default contactsRouter;

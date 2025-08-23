@@ -14,7 +14,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 const authRouter = Router();
 
 authRouter.post(
-  '/auth/register',
+  '/register',
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );

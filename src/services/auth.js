@@ -3,6 +3,7 @@ import { UserCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import { SessionCollection } from '../db/models/session.js';
 import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
+import { randomBytes } from 'node:crypto';
 
 export const registerUser = async (payload) => {
   const user = await UserCollection.findOne({
@@ -31,8 +32,8 @@ export const loginUser = async (payload) => {
 
   await SessionCollection.deleteOne({ userId: user._id });
 
-  const accessToken = reandomBytes(30).toString('base64');
-  const refreshToken = reandomBytes(30).toString('base64');
+  const accessToken = randomBytes(30).toString('base64');
+  const refreshToken = randomBytes(30).toString('base64');
 
   return await SessionCollection.create({
     userId: user._id,
@@ -41,7 +42,6 @@ export const loginUser = async (payload) => {
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
-
 };
 
 export const logoutUser = async (sessionId) => {
@@ -84,5 +84,4 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     userId: session.userId,
     ...newSession,
   });
-
 };

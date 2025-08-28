@@ -114,10 +114,12 @@ export const requestResetToken = async (email) => {
     name: user.name,
     link: `${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}`,
   });
+
   await sendEmail({
     from: getEnvVar(SMTP.SMTP_FROM),
     to: email,
     subject: 'Reset your password',
+
     html,
   });
 };
@@ -147,4 +149,5 @@ export const resetPassword = async (payload) => {
     { _id: user._id },
     { password: encryptedPassword },
   );
+
 };

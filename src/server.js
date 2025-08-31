@@ -7,6 +7,7 @@ import router from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 dotenv.config();
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -32,6 +33,7 @@ export const setupServer = async () => {
     res.send('API is running!');
   });
   app.use(router);
+  app.use('/uploads', express.static(UPLOAD_DIR));
   app.use(notFoundHandler);
   app.use(errorHandler);
 

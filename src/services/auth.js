@@ -4,6 +4,12 @@ import bcrypt from 'bcrypt';
 import { SessionCollection } from '../db/models/session.js';
 import { FIFTEEN_MINUTES, ONE_DAY, SMTP } from '../constants/index.js';
 import { randomBytes } from 'node:crypto';
+import Handlebars from 'handlebars';
+import fs from 'node:fs';
+import jwt from 'jsonwebtoken';
+import { sendEmail } from '../utils/sendMail.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
+import path from 'node:path';
 
 export const registerUser = async (payload) => {
   const user = await UserCollection.findOne({
@@ -103,16 +109,17 @@ export const requestResetToken = async (email) => {
       expiresIn: '15m',
     },
   );
+  const resetPasswordTemplatePath = path.join(
+    'templates',
+    'reset-password-email.html',
+  );
+  const templateSource = fs.readFileSync(resetPasswordTemplatePath).toString();
 
-  const templateSource = (
-    await fs.readFile(resetPasswordTemplatePath)
-  ).toString();
-
-  const template = handleBars.compile(templateSource);
+  const template = Handlebars.compile(templateSource);
 
   const html = template({
     name: user.name,
-    link: `${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}`,
+    link: `${getEnvVar('APP_DOMAIN')}/reset-pwd?token=${resetToken}`,
   });
 
   await sendEmail({

@@ -41,7 +41,9 @@ authRouter.post(
 );
 
 authRouter.post(
+
   '/reset-pwd',
+
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );

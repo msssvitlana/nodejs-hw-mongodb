@@ -21,7 +21,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 const authRouter = Router();
 
 authRouter.post(
-  '/auth/register',
+  '/register',
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
@@ -35,13 +35,15 @@ authRouter.post('/logout', ctrlWrapper(logoutUserController));
 authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
 authRouter.post(
-  '/request-reset-email',
+  '/send-reset-email',
   validateBody(requestResetEmailSchema),
   ctrlWrapper(requestResetEmailController),
 );
 
 authRouter.post(
-  '/auth/reset-pwd',
+
+  '/reset-pwd',
+
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );

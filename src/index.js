@@ -5,12 +5,13 @@ import { setupServer } from './server.js';
 import { createDirIfNotExists } from './utils/createDirIfNotExists.js';
 
 import dotenv from 'dotenv';
+import { initCloudinary } from './utils/saveFileToCloudinary.js';
 dotenv.config();
-
 
 async function start() {
   try {
     await initMongoConnection();
+    initCloudinary();
     await createDirIfNotExists(TEMP_UPLOAD_DIR);
     await createDirIfNotExists(UPLOAD_DIR);
 

@@ -9,7 +9,9 @@ import {
   TEMPLATES_DIR,
 } from '../constants/index.js';
 import { randomBytes } from 'node:crypto';
+
 import handlebars from 'handlebars';
+
 import fs from 'node:fs';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendMail.js';
@@ -115,6 +117,7 @@ export const requestResetToken = async (email) => {
     },
   );
   const resetPasswordTemplatePath = path.join(
+
     TEMPLATES_DIR,
     'reset-password-email.html',
   );
@@ -122,6 +125,7 @@ export const requestResetToken = async (email) => {
     await fs.readFile(resetPasswordTemplatePath)
   ).toString();
   const template = handlebars.compile(templateSource);
+
 
   const html = template({
     name: user.name,

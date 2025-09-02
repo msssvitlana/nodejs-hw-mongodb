@@ -2,9 +2,16 @@ import createHttpError from 'http-errors';
 import { UserCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import { SessionCollection } from '../db/models/session.js';
-import { FIFTEEN_MINUTES, ONE_DAY, SMTP } from '../constants/index.js';
+import {
+  FIFTEEN_MINUTES,
+  ONE_DAY,
+  SMTP,
+  TEMPLATES_DIR,
+} from '../constants/index.js';
 import { randomBytes } from 'node:crypto';
-import Handlebars from 'handlebars';
+
+import handlebars from 'handlebars';
+
 import fs from 'node:fs';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendMail.js';
@@ -110,12 +117,15 @@ export const requestResetToken = async (email) => {
     },
   );
   const resetPasswordTemplatePath = path.join(
-    'templates',
+
+    TEMPLATES_DIR,
     'reset-password-email.html',
   );
-  const templateSource = fs.readFileSync(resetPasswordTemplatePath).toString();
+  const templateSource = (
+    await fs.readFile(resetPasswordTemplatePath)
+  ).toString();
+  const template = handlebars.compile(templateSource);
 
-  const template = Handlebars.compile(templateSource);
 
   const html = template({
     name: user.name,
@@ -126,7 +136,6 @@ export const requestResetToken = async (email) => {
     from: getEnvVar(SMTP.SMTP_FROM),
     to: email,
     subject: 'Reset your password',
-
     html,
   });
 };

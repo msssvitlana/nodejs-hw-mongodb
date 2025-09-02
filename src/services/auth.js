@@ -12,7 +12,8 @@ import { randomBytes } from 'node:crypto';
 
 import handlebars from 'handlebars';
 
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
+
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendMail.js';
 import { getEnvVar } from '../utils/getEnvVar.js';

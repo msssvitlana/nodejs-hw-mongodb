@@ -2,12 +2,16 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
+
     "title": "Contacts app",
+
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
+
     "description": "This is a documentation of contacts app"
+
   },
   "servers": [
     {
@@ -29,6 +33,7 @@
   ],
   "paths": {
     "/contacts": {
+
       "get": {
         "tags": ["Contacts"],
         "summary": "Get all contacts",
@@ -71,6 +76,7 @@
           }
         }
       },
+
       "post": {
         "tags": ["Contacts"],
         "summary": "Create contact",
@@ -96,7 +102,9 @@
                   "phoneNumber": {
                     "description": "Contact's number",
                     "type": "string",
+
                     "example": "380500097909"
+
                   },
                   "email": {
                     "description": "Contact's email",
@@ -154,6 +162,7 @@
         "tags": ["Contacts"],
         "summary": "Get contact by id",
         "operationId": "getContact",
+
         "security": [
           {
             "bearerAuth": []
@@ -188,6 +197,7 @@
                       "example": "Successfully found contact with id 65ca67e7ae7f10c88b598384!"
                     },
                     "data": {
+
                       "$ref": "#/components/schemas/contact"
                     }
                   }
@@ -199,6 +209,7 @@
             "$ref": "#/components/responses/401"
           }
         }
+
       },
       "patch": {
         "tags": ["Contacts"],
@@ -322,6 +333,7 @@
             "$ref": "#/components/responses/401"
           }
         }
+
       }
     }
   },
